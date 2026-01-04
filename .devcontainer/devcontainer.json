@@ -35,7 +35,7 @@
   },
 
   // Post create commands
-  "postCreateCommand": "chmod +x /minecraft/start.sh && echo 'Codespace ready! See README.md for setup instructions.'",
+  "postCreateCommand": "chmod +x /workspaces/minecraft-server/start.sh /workspaces/minecraft-server/setup.sh && echo 'Codespace ready! See README.md for setup instructions.'",
 
   // VS Code customizations
   "customizations": {

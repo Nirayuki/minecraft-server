@@ -85,8 +85,13 @@ echo "Checking EULA acceptance..."
 echo "=========================================="
 echo ""
 
-# Check EULA
-if grep -q "eula=false" eula.txt 2>/dev/null; then
+# Check EULA - create if doesn't exist
+if [ ! -f "eula.txt" ]; then
+    echo "Creating eula.txt file..."
+    echo "eula=false" > eula.txt
+fi
+
+if grep -q "eula=false" eula.txt; then
     echo "⚠ Minecraft EULA not accepted"
     echo ""
     echo "The Minecraft End User License Agreement (EULA) must be accepted to run the server."
@@ -96,7 +101,7 @@ if grep -q "eula=false" eula.txt 2>/dev/null; then
     echo
     
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        sed -i 's/eula=false/eula=true/g' eula.txt
+        sed -i 's/eula=false/eula=true/' eula.txt
         echo "✓ EULA accepted"
     else
         echo "⚠ EULA not accepted. You must accept it to run the server."

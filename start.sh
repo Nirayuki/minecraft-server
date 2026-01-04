@@ -3,7 +3,21 @@
 # Minecraft Forge Server Startup Script
 # For Minecraft 1.16.5 with Forge 36.2.42
 
-cd /minecraft
+# Version configuration
+FORGE_VERSION="1.16.5-36.2.42"
+FORGE_JAR="forge-${FORGE_VERSION}.jar"
+
+# Check if minecraft directory exists and change to it
+if [ -d "/minecraft" ]; then
+    cd /minecraft
+elif [ -f "$FORGE_JAR" ]; then
+    # Already in correct directory
+    :
+else
+    echo "ERROR: Cannot find Minecraft server directory!"
+    echo "Please ensure you're in the correct directory or /minecraft exists."
+    exit 1
+fi
 
 # Set memory allocation (default 2GB, can be overridden by environment variable)
 MEMORY=${JAVA_MEMORY:-2G}
@@ -13,8 +27,8 @@ echo "Allocated Memory: $MEMORY"
 echo "=========================================="
 
 # Check if forge server jar exists
-if [ ! -f "forge-1.16.5-36.2.42.jar" ]; then
-    echo "ERROR: forge-1.16.5-36.2.42.jar not found!"
+if [ ! -f "$FORGE_JAR" ]; then
+    echo "ERROR: $FORGE_JAR not found!"
     echo "Please download and install Forge 1.16.5-36.2.42 first."
     echo "Visit: https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html"
     exit 1
@@ -49,4 +63,4 @@ java -Xms${MEMORY} -Xmx${MEMORY} \
     -XX:MaxTenuringThreshold=1 \
     -Dusing.aikars.flags=https://mcflags.emc.gs \
     -Daikars.new.flags=true \
-    -jar forge-1.16.5-36.2.42.jar nogui
+    -jar $FORGE_JAR nogui

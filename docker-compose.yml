@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  minecraft-forge:
+    build: .
+    container_name: minecraft-forge-server
+    ports:
+      - "25565:25565"
+    environment:
+      - JAVA_MEMORY=2G
+      - MINECRAFT_VERSION=1.16.5
+      - FORGE_VERSION=36.2.42
+    volumes:
+      # Mount server directory for persistence
+      - ./server:/minecraft
+      # Mount mods directory (for easy mod management)
+      - ./server/mods:/minecraft/mods
+      # Mount config directory
+      - ./server/config:/minecraft/config
+      # Mount world data
+      - ./server/world:/minecraft/world
+      # Mount logs
+      - ./server/logs:/minecraft/logs
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    networks:
+      - minecraft-network
+
+networks:
+  minecraft-network:
+    driver: bridge

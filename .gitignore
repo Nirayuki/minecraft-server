@@ -1,0 +1,67 @@
+# Minecraft Server Files
+server/forge-*.jar
+server/minecraft_server.*.jar
+server/libraries/
+server/versions/
+server/*.json
+server/*.jar
+
+# World data (uncommit if you want to preserve worlds)
+server/world/
+server/world_nether/
+server/world_the_end/
+
+# Logs
+server/logs/
+*.log
+*.log.*
+
+# Crash reports
+server/crash-reports/
+
+# Backups
+server/backups/
+
+# Runtime data
+server/usercache.json
+server/usernamecache.json
+server/ops.json
+server/whitelist.json
+server/banned-players.json
+server/banned-ips.json
+
+# Server specific
+server/server.properties.old
+
+# Forge specific files
+server/.mixin.out/
+server/asm/
+server/config/forge-client.toml
+server/config/forge-server.toml
+
+# Docker volumes and build cache
+.dockerignore
+docker-compose.override.yml
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Do NOT ignore these important directories
+!server/mods/.gitkeep
+!server/config/.gitkeep

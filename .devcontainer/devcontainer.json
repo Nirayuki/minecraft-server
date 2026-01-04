@@ -1,0 +1,58 @@
+{
+  "name": "Minecraft Forge 1.16.5 Server",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "minecraft-forge",
+  "workspaceFolder": "/minecraft",
+  
+  // Configure Codespace machine type
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+
+  // Features to install
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "8",
+      "installMaven": "false",
+      "installGradle": "false"
+    },
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true
+    }
+  },
+
+  // Ports to forward
+  "forwardPorts": [25565],
+  "portsAttributes": {
+    "25565": {
+      "label": "Minecraft Server",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // Post create commands
+  "postCreateCommand": "chmod +x /workspaces/minecraft-server/start.sh /workspaces/minecraft-server/setup.sh && echo 'Codespace ready! See README.md for setup instructions.'",
+
+  // VS Code customizations
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // Keep container running
+  "overrideCommand": false,
+  
+  // Run as root to allow server operations
+  "remoteUser": "root"
+}
